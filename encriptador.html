@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de Texto</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+
+    <audio class="music" src="lofihip.mp3" controls autoplay typy="audio/mpeg" loop> </audio>
+    <p class="mensaje">ᴅɪꜱꜰʀᴜᴛᴀ ᴅᴇ ʙᴜᴇɴᴀ ᴍᴜꜱᴄɪᴀ ᴍɪᴇɴᴛʀᴀꜱ ʜᴀᴄᴇꜱ ᴛᴜ ᴍᴇɴꜱᴀᴊᴇ ᴇɴᴄʀɪᴘᴛᴀᴅᴏ</p>
+        <main>
+            <div class="cajalogo">
+                <img src="imagenes/logoalura.png" alt="logo alura" class="logo">
+            </div>
+    
+            <textarea name="entrada" id="entrada"  class="entradaarea" placeholder="Ingrese texto aqui" cols="30" rows="10" autofocus></textarea>
+
+            <div class="cajaresultado"> 
+                <div class="contenedormensaje">                   
+                    <div class="persona">
+                        <img src="imagenes/persona.png" class="imagenmuneco" alt="">
+                    </div>
+
+                    <div class="mensajeresultado">
+                        <h2>Ningun mensaje fue encontrado</h2>
+                        <p>Ingrese el texto que desees encriptar o desencriptar</p>
+                    </div>
+                </div>
+
+                <button class="btnresultado" id="copy">Copiar</button>
+            </div>
+
+            
+
+            <div class="advertencia"><img src="imagenes/icono.png" class="imgadvertencia" alt=""> Solo letras minúsculas y sin acento</div>
+
+            <div class="cajabotones">
+                
+                <button class="btnencriptar">Encriptar</button>
+
+                <button class="btndesencriptar">Desencriptar</button>
+
+            </div>
+
+            
+    
+
+        </main>
+
+        <script>
+
+            let botonEncriptar = document.querySelector(".btnencriptar");
+            let botonDesencriptar = document.querySelector(".btndesencriptar");
+            let mensaje = document.querySelector(".entradaarea");
+            let strMensaje = mensaje.value;
+            let cadena = "a";
+
+            function validar(){
+                if(mensaje.value == mensaje.value.toLowerCase()){
+                    return true;
+                }else{
+                    return false;
+                }
+            
+            }
+            
+
+            function encriptar(){ 
+                    
+                    if(validar()){
+                        
+                    let arrayEncriptado = [];
+                    for(let i = 0; i < mensaje.value.length; i++ ){
+                        switch (mensaje.value[i]) {
+                            case 'e':
+                                arrayEncriptado.push('enter')
+                                break;
+                            case 'i':
+                                arrayEncriptado.push('imes');
+                                break;
+                            case 'a':
+                                arrayEncriptado.push('ai');
+                                break;
+                            case 'o':
+                                arrayEncriptado.push('ober');
+                                break;
+                            case 'u':
+                                arrayEncriptado.push('ufat');
+                                break;
+                            case ' ':
+                                arrayEncriptado.push(' ');
+                            break;
+                        default:
+                            arrayEncriptado.push(mensaje.value[i]);
+                        }
+                    }
+                
+                    
+
+                    document.querySelector(".contenedormensaje").innerHTML = `
+                        <textarea class='resultadoencriptado' cols='30'>${arrayEncriptado.join('')} </textarea>
+                        `;
+                    }else{
+                        alert("No se permiten mayusculas");
+                    }
+                 
+            } 
+        
+            
+
+            function desencriptar() {
+                if(validar()){
+                    
+                let mensajeDesencriptado =
+                mensaje.value.replace(/enter/g, 'e').replace(/imes/g, 'i').replace(/ai/g, 'a').replace(/ober/g, 'o').replace(/ufat/g, 'u');
+                
+                document.querySelector(".contenedormensaje").innerHTML = `
+                    <textarea class='resultadoencriptado' cols='30'>${mensajeDesencriptado} </textarea>
+                    `;
+                }else{
+                    alert("No se permiten mayusculas");
+                }
+            }
+
+            function copy() {
+                let copyText = document.querySelector(".resultadoencriptado");
+                copyText.select();
+                document.execCommand("copy");
+                alert("Se ha copiado el mensaje");
+                mensaje.focus();
+            }
+
+        
+    
+
+            
+            document.querySelector("#copy").addEventListener("click", copy);
+            
+            botonEncriptar.onclick = encriptar;
+            
+            botonDesencriptar.onclick = desencriptar;
+
+            
+    /* este programa fue ayudado por Lucas, Gracias lucas! */ 
+
+        </script>
+
+    </body>
+
+
+</html>
+
